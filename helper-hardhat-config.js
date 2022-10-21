@@ -5,7 +5,7 @@ const networkConfig = {
     gasLane:
       "0xd89b2bf150e3b9e13446986e571fb9cab24b13cea0a43ea20a6049a85cc807cc", // 30 gwei
     mintFee: "10000000000000000", // 0.01 ETH
-    callbackGasLimit: "500000", // 500,000 gas
+    callbackGasLimit: "5000000000", // 500,000 gas
     keepersUpdateInterval: "30",
   },
   // Price Feed Address, values can be obtained at https://docs.chain.link/docs/reference-contracts
@@ -24,9 +24,20 @@ const networkConfig = {
 
 const VERIFICATION_BLOCK_CONFIRMATIONS = 6
 const developmentChains = ["hardhat", "localhost"]
+const frontEndContractsFile =
+  "../l15-nextjs-nft-marketplace-moralis-fe1/constants/networkMapping.json"
+// const frontEndContractsFile2 =
+//   "../nextjs-nft-marketplace-thegraph-fcc/constants/networkMapping.json"
+const frontEndAbiLocation =
+  "../l15-nextjs-nft-marketplace-moralis-fe1/constants/"
+// const frontEndAbiLocation2 = "../nextjs-nft-marketplace-thegraph-fcc/constants/"
 
 module.exports = {
   networkConfig,
   developmentChains,
   VERIFICATION_BLOCK_CONFIRMATIONS,
+  frontEndContractsFile,
+  // frontEndContractsFile2,
+  frontEndAbiLocation,
+  // frontEndAbiLocation2,
 }
