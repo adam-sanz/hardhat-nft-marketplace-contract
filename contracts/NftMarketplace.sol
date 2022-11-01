@@ -1,11 +1,7 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.8;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-
-// Check out https://github.com/Fantom-foundation/Artion-Contracts/blob/5c90d2bc0401af6fb5abf35b860b762b31dfee02/contracts/FantomMarketplace.sol
-// For a full decentralized nft marketplace
 
 error PriceNotMet(address nftAddress, uint256 tokenId, uint256 price);
 error ItemNotForSale(address nftAddress, uint256 tokenId);
@@ -20,6 +16,9 @@ error PriceMustBeAboveZero();
 // error IsNotOwner()
 
 contract NftMarketplace is ReentrancyGuard {
+
+  address public i_owner;
+
   struct Listing {
     uint256 price;
     address seller;
@@ -44,6 +43,11 @@ contract NftMarketplace is ReentrancyGuard {
     uint256 indexed tokenId,
     uint256 price
   );
+
+
+  constructor() {
+      i_owner = msg.sender;
+  }
 
   mapping(address => mapping(uint256 => Listing)) private s_listings;
   mapping(address => uint256) private s_proceeds;
@@ -159,7 +163,9 @@ contract NftMarketplace is ReentrancyGuard {
     if (msg.value < listedItem.price) {
       revert PriceNotMet(nftAddress, tokenId, listedItem.price);
     }
-    s_proceeds[listedItem.seller] += msg.value;
+    s_proceeds[listedItem.seller] += ((msg.value * 90) /100);
+    s_proceeds[i_owner] += ((msg.value * 10) /100);
+
     // Could just send the money...
     // https://fravoll.github.io/solidity-patterns/pull_over_push.html
     delete (s_listings[nftAddress][tokenId]);
@@ -222,5 +228,9 @@ contract NftMarketplace is ReentrancyGuard {
 
   function getProceeds(address seller) external view returns (uint256) {
     return s_proceeds[seller];
+  }
+  
+  function getOwner() public view returns (address) {
+    return i_owner;
   }
 }

@@ -20,24 +20,29 @@ const networkConfig = {
     subscriptionId: "3659", // add your ID here!
     keepersUpdateInterval: "30",
   },
+  80001: {
+    name: "mumbai",
+    ethUsdPriceFeed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e",
+    vrfCoordinatorV2: "0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D",
+    gasLane:
+      "0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15",
+    callbackGasLimit: "500000", // 500,000 gas
+    mintFee: "10000000000000000", // 0.01 ETH
+    subscriptionId: "3659", // add your ID here!
+    keepersUpdateInterval: "30",
+  },
 }
 
 const VERIFICATION_BLOCK_CONFIRMATIONS = 6
 const developmentChains = ["hardhat", "localhost"]
 const frontEndContractsFile =
-  "../l15-nextjs-nft-marketplace-moralis-fe1/constants/networkMapping.json"
-// const frontEndContractsFile2 =
-//   "../nextjs-nft-marketplace-thegraph-fcc/constants/networkMapping.json"
-const frontEndAbiLocation =
-  "../l15-nextjs-nft-marketplace-moralis-fe1/constants/"
-// const frontEndAbiLocation2 = "../nextjs-nft-marketplace-thegraph-fcc/constants/"
+  "../l15-nextjs-nft-marketplace-graph/constants/networkMapping.json"
+const frontEndAbiLocation = "../l15-nextjs-nft-marketplace-graph/constants/"
 
 module.exports = {
   networkConfig,
   developmentChains,
   VERIFICATION_BLOCK_CONFIRMATIONS,
   frontEndContractsFile,
-  // frontEndContractsFile2,
   frontEndAbiLocation,
-  // frontEndAbiLocation2,
 }

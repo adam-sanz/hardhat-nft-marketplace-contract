@@ -1,7 +1,7 @@
 const { ethers, network } = require("hardhat")
 const { moveBlocks } = require("../utils/move-blocks")
 
-const PRICE = ethers.utils.parseEther("0.1")
+const PRICE = ethers.utils.parseEther("13")
 
 async function mintAndList() {
   const nftMarketplace = await ethers.getContract("NftMarketplace")
@@ -14,7 +14,8 @@ async function mintAndList() {
   // }
   console.log("Minting NFT...")
   const mintTx = await basicNft.mintNft()
-  const mintTxReceipt = await mintTx.wait(1)
+  const mintTxReceipt = await mintTx.wait(2)
+  console.log("mintTxReceipt.events[0]", mintTxReceipt.events)
   const tokenId = mintTxReceipt.events[0].args.tokenId
   console.log("Approving NFT...")
   const approvalTx = await basicNft.approve(nftMarketplace.address, tokenId)

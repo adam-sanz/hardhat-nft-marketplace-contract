@@ -17,14 +17,11 @@ const MAINNET_RPC_URL =
 const GOERLI_RPC_URL =
   process.env.GOERLI_RPC_URL ||
   "https://eth-goerli.alchemyapi.io/v2/your-api-key"
-const KOVAN_RPC_URL =
-  process.env.KOVAN_RPC_URL || "https://eth-kovan.alchemyapi.io/v2/your-api-key"
+const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL
 const POLYGON_MAINNET_RPC_URL =
   process.env.POLYGON_MAINNET_RPC_URL ||
   "https://polygon-mainnet.alchemyapi.io/v2/your-api-key"
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x"
-// optional
-const MNEMONIC = process.env.MNEMONIC || "your mnemonic"
 
 // Your API key for Etherscan, obtain one at https://etherscan.io/
 const ETHERSCAN_API_KEY =
@@ -64,6 +61,12 @@ module.exports = {
       saveDeployments: true,
       chainId: 1,
     },
+    mumbai: {
+      url: MUMBAI_RPC_URL,
+      accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
+      chainId: 80001,
+      saveDeployments: true,
+    },
     polygon: {
       url: POLYGON_MAINNET_RPC_URL,
       accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
@@ -75,7 +78,7 @@ module.exports = {
     // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
     apiKey: {
       goerli: ETHERSCAN_API_KEY,
-      polygon: POLYGONSCAN_API_KEY,
+      polygonMumbai: POLYGONSCAN_API_KEY,
     },
     customChains: [],
   },
